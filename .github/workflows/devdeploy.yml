@@ -1,13 +1,9 @@
-name: Build and Test .NET Web API # The name of the workflow as it appears in GitHub Actions UI
+name: Develop Branch Build Test Deploy # The name of the workflow as it appears in GitHub Actions UI
 
 on: # Specifies the events that trigger this workflow
   push: # Trigger when code is pushed to the repository
     branches:
-      - main        # Trigger on pushes to the main branch
-      - develop     # Trigger on pushes to the develop branch
-  pull_request: # Trigger when a pull request is opened or updated
-    branches:
-      - '*' # Trigger on pull requests to any branch
+      - develop     # Trigger only on pushes (including merges) to the develop branch
 
 jobs: # Defines the jobs that will run as part of this workflow
   build: # The name of the job
@@ -30,6 +26,9 @@ jobs: # Defines the jobs that will run as part of this workflow
 
       - name: Test # Step 5: Runs unit tests for the project
         run: dotnet test BackEndAPI/BackEndAPI.sln --no-build --configuration Release --verbosity normal # Specify the solution path
+
+      - name: Publish (optional) # Step 6: Publishes the build output to a folder (optional step, can be used for deployment)
+        run: dotnet publish BackEndAPI/BackEndAPI.sln --configuration Release --output ./published # Specify the solution path
 
       # Add steps to upload artifacts if needed for deployment
       # For example, you can use 'actions/upload-artifact' to save build outputs for later use
