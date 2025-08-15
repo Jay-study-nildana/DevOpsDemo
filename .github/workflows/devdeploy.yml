@@ -62,3 +62,31 @@ jobs: # Defines the jobs that will run as part of this workflow
 #    - Enables advanced deployment workflows and automation beyond simple web app publishing.
 #    - Preferred for CI/CD pipelines in professional and enterprise settings.
 ####################################################################################################
+
+
+####################################################################################################
+# Notes on Mapping Azure CLI Service Principal Output to GitHub Actions Secret Format
+#
+# When using the azure/login GitHub Action for Service Principal authentication, the secret must be in a specific JSON format.
+# The Azure CLI creates a service principal with output like this:
+#
+# Azure CLI Output Example:
+# {
+#   "appId": "<masked-appId>",
+#   "displayName": "<masked-displayName>",
+#   "password": "<masked-password>",
+#   "tenant": "<masked-tenant>"
+# }
+#
+# For GitHub Actions, you must remap these fields and add your Azure subscription ID:
+#
+# Expected GitHub Actions Secret Format:
+# {
+#   "clientId": "<masked-appId>",         # from appId
+#   "clientSecret": "<masked-password>",  # from password
+#   "tenantId": "<masked-tenant>",        # from tenant
+#   "subscriptionId": "<masked-subscriptionId>" # your Azure subscription ID
+# }
+#
+# Store this JSON as a GitHub secret (e.g., AZURE_CREDENTIALS) and reference it in your workflow using the 'creds' input.
+####################################################################################################
