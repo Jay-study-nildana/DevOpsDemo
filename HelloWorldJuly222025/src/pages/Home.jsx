@@ -17,7 +17,7 @@ export default function Home() {
         <div className="col-md-6">
           <div className="card shadow-sm h-100">
             <div className="card-body">
-              <h5 className="card-title">Why React 18.x?</h5>
+              <h5 className="card-title">Why React HHHHH?</h5>
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">Concurrent rendering for better performance</li>
                 <li className="list-group-item">Automatic batching of updates</li>

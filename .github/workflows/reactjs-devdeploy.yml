@@ -28,31 +28,6 @@ jobs: # Defines the jobs that will run as part of this workflow
         run: npm run build
         working-directory: HelloWorldJuly222025 # Specify the React project folder
 
-      - name: Add web.config for SPA routing # Step: Ensure Azure serves static files and supports SPA routing
-        run: |
-          cat > HelloWorldJuly222025/dist/web.config <<EOF
-          <?xml version="1.0" encoding="utf-8"?>
-          <configuration>
-            <system.webServer>
-              <rewrite>
-                <rules>
-                  <rule name="React Routes" stopProcessing="true">
-                    <match url=".*" />
-                    <conditions logicalGrouping="MatchAll">
-                      <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
-                      <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
-                    </conditions>
-                    <action type="Rewrite" url="/index.html" />
-                  </rule>
-                </rules>
-              </rewrite>
-              <staticContent>
-                <mimeMap fileExtension=".json" mimeType="application/json" />
-              </staticContent>
-            </system.webServer>
-          </configuration>
-          EOF        
-
       - name: Test # Step 5: Runs unit tests for the ReactJS project
         run: npm test # Runs the test script defined in package.json
         working-directory: HelloWorldJuly222025 # Specify the React project folder        
