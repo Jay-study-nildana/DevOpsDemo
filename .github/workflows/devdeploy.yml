@@ -32,3 +32,10 @@ jobs: # Defines the jobs that will run as part of this workflow
 
       # Add steps to upload artifacts if needed for deployment
       # For example, you can use 'actions/upload-artifact' to save build outputs for later use
+
+      - name: Deploy to Azure Web App # Step 7: Deploys the published output to Azure Web App using best practices
+        uses: azure/webapps-deploy@v3 # Uses the official Azure Web Apps Deploy action
+        with:
+          app-name: devwebappaugust152025 # Replace with your Azure Web App name
+          publish-profile: ${{ secrets.AZURE_CREDENTIALS }} # Uses the Azure credentials stored as a GitHub secret
+          package: ./published # Path to the published output folder
