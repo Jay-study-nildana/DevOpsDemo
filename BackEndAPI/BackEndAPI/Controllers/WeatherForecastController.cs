@@ -1,3 +1,6 @@
+using BackEndAPI.Implementations;
+using BackEndAPI.Interfaces;
+using BackEndAPI.POCO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BackEndAPI.Controllers
@@ -12,10 +15,14 @@ namespace BackEndAPI.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IMathOperations _mathOperations;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(
+            ILogger<WeatherForecastController> logger,
+            IMathOperations mathOperations)
         {
             _logger = logger;
+            _mathOperations = mathOperations;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
@@ -28,6 +35,19 @@ namespace BackEndAPI.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [HttpGet("math")]
+        public ActionResult<MathResult> GetMathResult([FromQuery] double a, [FromQuery] double b)
+        {
+            var result = new MathResult
+            {
+                Add = _mathOperations.Add(a, b),
+                Subtract = _mathOperations.Subtract(a, b),
+                Multiply = _mathOperations.Multiply(a, b),
+                Divide = _mathOperations.Divide(a, b)
+            };
+            return Ok(result);
         }
     }
 }
