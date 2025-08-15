@@ -25,6 +25,19 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
+app.UseStaticFiles();
+
+// Redirect root requests to index.html
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path == "/")
+    {
+        context.Response.Redirect("/index.html");
+        return;
+    }
+    await next();
+});
+
 app.UseAuthorization();
 
 app.MapControllers();
