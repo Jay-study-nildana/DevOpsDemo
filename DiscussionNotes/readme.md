@@ -1,15 +1,6 @@
-# DevOpsDemo
+# General Discussion notes
 
-Shows how to do beginner level deployment. 
-
-# Projects
-
-1. [.NET Web API](BackEndAPI)
-1. [Razor Front End](RazorFrontEnd)
-
-Visit .github/workflows for all the YAMLS used in this repo. 
-
-Some additional notes here, [DiscussionNotes](DiscussionNotes)
+Just some random discussions and notes that I have with AI.
 
 # book a session with me
 
