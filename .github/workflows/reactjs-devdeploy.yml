@@ -32,13 +32,16 @@ jobs: # Defines the jobs that will run as part of this workflow
       # For example, you can use 'actions/upload-artifact' to save build outputs for later use
 
       - name: Zip build output # Compress contents for Azure deployment
-        run: cd HelloWorldJuly222025/dist && zip -r ../../../dist.zip . && cd ../../../
+        run: cd HelloWorldJuly222025/dist && zip -r ../dist.zip . && cd ../../..
 
       - name: List workspace contents # Debug: See where dist.zip is created
         run: ls -l
 
       - name: List contents of HelloWorldJuly222025 # Debug: Check if dist.zip is inside the project folder
         run: ls -l HelloWorldJuly222025        
+
+      - name: List contents of dist.zip # Step: Inspect the ZIP file before deployment
+        run: unzip -l HelloWorldJuly222025/dist.zip        
 
       - name: List contents of dist.zip # Step: Inspect the ZIP file before deployment
         run: unzip -l dist.zip
