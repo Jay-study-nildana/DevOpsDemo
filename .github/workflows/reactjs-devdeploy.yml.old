@@ -1,0 +1,83 @@
+# I have left plenty of comments at the end of this file for you to note down for your first devops deployment
+
+# Summary & Conclusion: Deploying Vite React to Azure
+
+# You built and deployed a Vite-based ReactJS app to Azure Web App (App Service on Linux, Node.js stack) using various Azure deployment best practices.
+# The build output (dist) was correctly zipped and deployed, and files appeared in /home/site/wwwroot.
+# Despite successful deployment, the site did not run as expected due to limitations of Azure Web App on Linux for serving pure static sites. It requires a custom Node.js server or additional configuration, which adds complexity and is not ideal for static SPA hosting.
+# You explored using the official GitHub Action (azure/webapps-deploy@v2) and Service Principal authentication, but the core issue remained: Azure Web App is not optimized for static React/Vite apps.
+# Recommended Solution:
+# For Vite-based React apps (and most modern SPAs), Azure Static Web Apps is the best choice. It is designed for static site hosting, provides automatic routing, global CDN, easy GitHub Actions integration, and requires no custom server or web.config.
+# This approach saves time, reduces complexity, and follows Azure SWA best practices.
+# Conclusion:
+# For Vite React projects, use Azure Static Web Apps instead of Azure Web App (App Service) for a smoother, faster, and more reliable deployment experience.
+
+## Ultimately, I am keeping this here for discussion purposes. 
+# This method puts all the files where it is supposed to and I can verify that files are happening via the bash shell. 
+# but, the app simply won't deploy
+
+name: Deploy Dev ReactJS App # The name of the workflow as it appears in GitHub Actions UI
+
+on: # Specifies the events that trigger this workflow
+  push: # Trigger when code is pushed to the repository
+    branches:
+      - develop-reactjs     # Trigger only on pushes (including merges) to the develop branch
+      
+jobs: # Defines the jobs that will run as part of this workflow
+  build:
+    runs-on: ubuntu-latest # The job will run on the latest available Ubuntu runner
+
+    steps:
+      - name: Checkout code # Step 1: Checks out the repository code so it can be used by subsequent steps
+        uses: actions/checkout@v3 # Uses the official GitHub Action for checking out code
+
+      - name: Setup Node.js # Step 2: Sets up Node.js on the runner
+        uses: actions/setup-node@v4 # Uses the official GitHub Action for setting up Node.js
+        with:
+          node-version: '20.x' # Specifies the version of Node.js to install (use your project's required version)
+
+      - name: Install dependencies # Step 3: Installs npm dependencies
+        run: npm install
+        working-directory: HelloWorldJuly222025 # Specify the React project folder
+
+      - name: Build # Step 4: Builds the ReactJS project
+        run: npm run build
+        working-directory: HelloWorldJuly222025 # Specify the React project folder
+
+      - name: Test # Step 5: Runs unit tests for the ReactJS project
+        run: npm test # Runs the test script defined in package.json
+        working-directory: HelloWorldJuly222025 # Specify the React project folder        
+
+      # Add steps to upload artifacts if needed for deployment
+      # For example, you can use 'actions/upload-artifact' to save build outputs for later use
+
+      - name: Zip build output # Compress contents for Azure deployment
+        run: cd HelloWorldJuly222025/dist && zip -r ../dist.zip . && cd ../../..
+
+      - name: List workspace contents # Debug: See where dist.zip is created
+        run: ls -l
+
+      - name: List contents of HelloWorldJuly222025 # Debug: Check if dist.zip is inside the project folder
+        run: ls -l HelloWorldJuly222025        
+
+      - name: List contents of dist.zip # Step: Inspect the ZIP file before deployment
+        run: unzip -l HelloWorldJuly222025/dist.zip        
+
+      - name: Azure Login # Authenticate to Azure using Service Principal
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy to Azure Web App # Deploy using official GitHub Action
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: reacthelloworlddevaugust152025
+          package: HelloWorldJuly222025/dist.zip
+
+####################################################################################################
+# Notes:
+# - This workflow is designed for a ReactJS app located in the HelloWorldJuly222025 folder.
+# - The build output is zipped so that files are placed directly in wwwroot on Azure.
+# - Update resource group and web app name as needed.
+# - For Vite projects, the build folder may be 'dist' instead of 'build'. Adjust paths accordingly.
+####################################################################################################
