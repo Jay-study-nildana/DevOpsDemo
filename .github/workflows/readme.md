@@ -8,7 +8,6 @@ This folder contains all the workflows of the current project.
     1. Performs build and unit test running. Useful for checking PRs and branch merges
 1. [backendapi-devdeploy.yml](backendapi-devdeploy.yml)
     1. Deploys to a web app to Azure Web Apps
-
 # Razor Front End Project
 
 1. [RazorFrontEnd-ci.yml](RazorFrontEnd-ci.yml)
