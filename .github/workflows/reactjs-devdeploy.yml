@@ -54,7 +54,7 @@ jobs: # Defines the jobs that will run as part of this workflow
 
       - name: Deploy to Azure Web App using Azure CLI
         run: |
-          az webapp deployment source config-zip --resource-group rgaugust15th2025 --name reacthelloworlddevaugust152025 --src HelloWorldJuly222025/dist.zip
+          az webapp deploy --resource-group rgaugust15th2025 --name reacthelloworlddevaugust152025 --src-path HelloWorldJuly222025/dist.zip
 
 ####################################################################################################
 # Notes:
