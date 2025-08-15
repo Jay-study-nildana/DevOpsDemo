@@ -72,14 +72,13 @@ jobs: # Defines the jobs that will run as part of this workflow
       - name: List contents of dist.zip # Step: Inspect the ZIP file before deployment
         run: unzip -l HelloWorldJuly222025/dist.zip        
 
-      - name: Azure Login # Step 5: Authenticates to Azure using Service Principal credentials
-        uses: azure/login@v2
+      - name: Deploy to Azure Web App # Step: Deploy using official GitHub Action with Service Principal
+        uses: azure/webapps-deploy@v2
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}        
-
-      - name: Deploy to Azure Web App using Azure CLI
-        run: |
-          az webapp deploy --resource-group rgaugust15th2025 --name reacthelloworlddevaugust152025 --src-path HelloWorldJuly222025/dist.zip
+          app-name: reacthelloworlddevaugust152025 # Your Azure Web App name
+          package: HelloWorldJuly222025/dist.zip   # Path to zipped build output
+        env:
+          AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
 ####################################################################################################
 # Notes:
