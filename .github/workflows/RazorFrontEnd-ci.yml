@@ -23,7 +23,7 @@ jobs: # Defines the jobs that will run as part of this workflow
           dotnet-version: '8.0.x' # Specifies the version of .NET SDK to install (8.0.x means any 8.0 version)
 
       - name: Restore dependencies # Step 3: Restores NuGet packages required by the project
-        run: dotnet restore BackEndAPI/BackEndAPI.sln # Specify the solution path
+        run: dotnet restore RazorFrontEnd/RazorFrontEnd.sln # Specify the solution path
 
       - name: Build # Step 4: Builds the project in Release configuration
         run: dotnet build RazorFrontEnd/RazorFrontEnd.sln --no-restore --configuration Release # Specify the solution path
