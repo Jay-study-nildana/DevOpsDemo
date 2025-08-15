@@ -1,0 +1,35 @@
+name: Build and Test .NET Razor Front End # The name of the workflow as it appears in GitHub Actions UI
+
+on: # Specifies the events that trigger this workflow
+  push: # Trigger when code is pushed to the repository
+    branches:
+      - main-razorfe        # Trigger on pushes to the main branch
+      - develop-razorfe     # Trigger on pushes to the develop branch
+  pull_request: # Trigger when a pull request is opened or updated
+    branches:
+      - '*' # Trigger on pull requests to any branch
+
+jobs: # Defines the jobs that will run as part of this workflow
+  build: # The name of the job
+    runs-on: ubuntu-latest # The job will run on the latest available Ubuntu runner
+
+    steps: # The sequence of steps to execute in the job
+      - name: Checkout code # Step 1: Checks out the repository code so it can be used by subsequent steps
+        uses: actions/checkout@v3 # Uses the official GitHub Action for checking out code
+
+      - name: Setup .NET # Step 2: Sets up the .NET SDK on the runner
+        uses: actions/setup-dotnet@v3 # Uses the official GitHub Action for setting up .NET
+        with:
+          dotnet-version: '8.0.x' # Specifies the version of .NET SDK to install (8.0.x means any 8.0 version)
+
+      - name: Restore dependencies # Step 3: Restores NuGet packages required by the project
+        run: dotnet restore RazorFrontEnd/RazorFrontEnd.sln # Specify the solution path
+
+      - name: Build # Step 4: Builds the project in Release configuration
+        run: dotnet build RazorFrontEnd/RazorFrontEnd.sln --no-restore --configuration Release # Specify the solution path
+
+      - name: Test # Step 5: Runs unit tests for the project
+        run: dotnet test RazorFrontEnd/RazorFrontEnd.sln --no-build --configuration Release --verbosity normal # Specify the solution path
+
+      # Add steps to upload artifacts if needed for deployment
+      # For example, you can use 'actions/upload-artifact' to save build outputs for later use

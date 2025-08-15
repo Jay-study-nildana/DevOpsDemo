@@ -1,12 +1,17 @@
-# DevOpsDemo
+# GitHub Actions Work Flow Welcome
 
-Shows how to do beginner level deployment. 
+This folder contains all the workflows of the current project. 
 
-# Projects
+# BackEndAPI Project
 
-1. [.NET Web API](BackEndAPI)
+1. [backendapi-ci.yml](backendapi-ci.yml)
+    1. Performs build and unit test running. Useful for checking PRs and branch merges
+1. [backendapi-devdeploy.yml](backendapi-devdeploy.yml)
+    1. Deploys to a web app to Azure Web Apps
+# Razor Front End Project
 
-Visit .github/workflows for all the YAMLS used in this repo. 
+1. [RazorFrontEnd-ci.yml](RazorFrontEnd-ci.yml)
+    1. Performs build and unit test running. Useful for checking PRs and branch merges
 
 # book a session with me
 
@@ -24,3 +29,4 @@ find ways to hire me, follow me and stay in touch with me.
 1. [stackoverflow](https://stackoverflow.com/users/5338888/jay)
 1. [Jay's Coding Channel on YouTube](https://www.youtube.com/channel/UCJJVulg4J7POMdX0veuacXw/)
 1. [medium blog](https://medium.com/@vijayasimhabr)
+
