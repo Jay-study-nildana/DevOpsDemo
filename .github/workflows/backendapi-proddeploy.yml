@@ -1,11 +1,11 @@
 # I have left plenty of comments at the end of this file for you to note down for your first devops deployment
 
-name: Deploy Dev .NET Web API # The name of the workflow as it appears in GitHub Actions UI
+name: Deploy Prod .NET Web API # The name of the workflow as it appears in GitHub Actions UI
 
 on: # Specifies the events that trigger this workflow
   push: # Trigger when code is pushed to the repository
     branches:
-      - develop     # Trigger only on pushes (including merges) to the develop branch
+      - main     # Trigger only on pushes (including merges) to the main branch
 
 jobs: # Defines the jobs that will run as part of this workflow
   build: # The name of the job
@@ -52,7 +52,7 @@ jobs: # Defines the jobs that will run as part of this workflow
 
       - name: Deploy to Azure Web App using Azure CLI # Step: Deploy the zipped output
         run: |
-          az webapp deploy --resource-group rgaugust15th2025 --name devwebappaugust152025 --src-path published.zip
+          az webapp deploy --resource-group rgaugust15th2025 --name proddevwebappaugust152025 --src-path published.zip
 
 ####################################################################################################
 # Comparison of Azure Web App Deployment Methods in GitHub Actions
