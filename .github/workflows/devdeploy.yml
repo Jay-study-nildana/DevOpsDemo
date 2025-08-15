@@ -27,7 +27,7 @@ jobs: # Defines the jobs that will run as part of this workflow
       - name: Test # Step 5: Runs unit tests for the project
         run: dotnet test BackEndAPI/BackEndAPI.sln --no-build --configuration Release --verbosity normal # Specify the solution path
 
-      - name: Publish (optional) # Step 6: Publishes the build output to a folder (optional step, can be used for deployment)
+      - name: Publish # Step 6: Publishes the build output to a folder (optional step, can be used for deployment)
         run: dotnet publish BackEndAPI/BackEndAPI.sln --configuration Release --output ./published # Specify the solution path
 
       # Add steps to upload artifacts if needed for deployment
@@ -38,9 +38,12 @@ jobs: # Defines the jobs that will run as part of this workflow
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Deploy to Azure Web App using Azure CLI # Step 8: Deploys the published output using Azure CLI best practices
+      - name: Zip published output # Step: Compress the published folder for Azure deployment
+        run: zip -r published.zip ./published          
+
+      - name: Deploy to Azure Web App using Azure CLI # Step: Deploy the zipped output
         run: |
-          az webapp deploy --resource-group rgaugust15th2025 --name devwebappaugust152025 --src-path ./published
+          az webapp deploy --resource-group rgaugust15th2025 --name devwebappaugust152025 --src-path published.zip
 
 ####################################################################################################
 # Comparison of Azure Web App Deployment Methods in GitHub Actions
@@ -89,4 +92,15 @@ jobs: # Defines the jobs that will run as part of this workflow
 # }
 #
 # Store this JSON as a GitHub secret (e.g., AZURE_CREDENTIALS) and reference it in your workflow using the 'creds' input.
+####################################################################################################
+
+####################################################################################################
+# Notes on Build Output and Deployment Artifacts in GitHub Actions
+#
+# The 'dotnet publish' step creates a 'published' folder containing your build output.
+# The 'zip -r published.zip ./published' step compresses this folder into a ZIP file.
+#
+# Both the 'published' folder and 'published.zip' exist only on the GitHub Actions runner
+# (the temporary virtual machine that executes your workflow). They are not stored in your repository.
+# These files are available only during the workflow run and are used for deployment or as artifacts.
 ####################################################################################################
