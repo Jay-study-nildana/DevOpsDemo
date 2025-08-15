@@ -33,9 +33,35 @@ jobs: # Defines the jobs that will run as part of this workflow
       # Add steps to upload artifacts if needed for deployment
       # For example, you can use 'actions/upload-artifact' to save build outputs for later use
 
-      - name: Deploy to Azure Web App # Step 7: Deploys the published output to Azure Web App using best practices
-        uses: azure/webapps-deploy@v3 # Uses the official Azure Web Apps Deploy action
+      - name: Azure Login # Step 7: Authenticates to Azure using Service Principal credentials
+        uses: azure/login@v2
         with:
-          app-name: devwebappaugust152025 # Replace with your Azure Web App name
-          publish-profile: ${{ secrets.AZURE_CREDENTIALS }} # Uses the Azure credentials stored as a GitHub secret
-          package: ./published # Path to the published output folder
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Deploy to Azure Web App using Azure CLI # Step 8: Deploys the published output using Azure CLI best practices
+        run: |
+          az webapp deploy --resource-group rgaugust15th2025 --name devwebappaugust152025 --src-path ./published
+
+####################################################################################################
+# Comparison of Azure Web App Deployment Methods in GitHub Actions
+#
+# 1. Publish Profile Method:
+#    - Uses the azure/webapps-deploy GitHub Action.
+#    - Requires downloading the publish profile XML from the Azure Portal and storing it as a GitHub secret.
+#    - Simple to set up for most web app deployments.
+#    - Limited to web app deployments and less flexible for advanced automation or multi-resource scenarios.
+#
+# 2. Service Principal + Azure CLI Method (Chosen Approach):
+#    - Uses a Service Principal for authentication via the azure/login action.
+#    - Deploys using Azure CLI commands (e.g., az webapp deploy).
+#    - More flexible and secure for automation, especially in enterprise or multi-resource environments.
+#    - Allows integration with other Azure resources and advanced deployment scenarios.
+#
+# Reason for Choosing Service Principal:
+#    - Credentials are managed securely and can be reused for other Azure resources.
+#    - Enables advanced deployment workflows and automation beyond simple web app publishing.
+#    - Preferred for CI/CD pipelines in professional and enterprise settings.
+####################################################################################################
