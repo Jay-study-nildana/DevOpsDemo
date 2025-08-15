@@ -1,15 +1,13 @@
 # DevOpsDemo
 
-Shows how to do beginner level deployment. 
+This is the main branch. It is empty on purpose. Check individual branches for different projects and corresponding deployment files. 
 
-# Projects
+As of now, following 4 branches are available. 
 
-1. [.NET Web API](BackEndAPI)
-1. [Razor Front End](RazorFrontEnd)
-
-Visit .github/workflows for all the YAMLS used in this repo. 
-
-Some additional notes here, [DiscussionNotes](DiscussionNotes)
+1. main-webapi
+1. develop-webapi
+1. main-razorfe
+1. develop-razorfe
 
 # book a session with me
 
