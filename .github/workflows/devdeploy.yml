@@ -1,3 +1,5 @@
+# I have left plenty of comments at the end of this file for you to note down for your first devops deployment
+
 name: Develop Branch Build Test Deploy # The name of the workflow as it appears in GitHub Actions UI
 
 on: # Specifies the events that trigger this workflow
@@ -38,8 +40,15 @@ jobs: # Defines the jobs that will run as part of this workflow
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Zip published output # Step: Compress the published folder for Azure deployment
-        run: zip -r published.zip ./published          
+      # - name: Zip published output # Step: Compress the published folder for Azure deployment
+      #   run: zip -r published.zip ./published    
+      # this type of zipping is putting files in a folder called published which is not what we want
+
+      - name: Zip published output # Compress contents for Azure deployment
+        run: cd published && zip -r ../published.zip . && cd ..      
+
+      - name: List contents of published.zip # Step: Inspect the ZIP file before deployment
+        run: unzip -l published.zip              
 
       - name: Deploy to Azure Web App using Azure CLI # Step: Deploy the zipped output
         run: |
@@ -103,4 +112,14 @@ jobs: # Defines the jobs that will run as part of this workflow
 # Both the 'published' folder and 'published.zip' exist only on the GitHub Actions runner
 # (the temporary virtual machine that executes your workflow). They are not stored in your repository.
 # These files are available only during the workflow run and are used for deployment or as artifacts.
+####################################################################################################
+
+####################################################################################################
+# Notes on Accessing Azure Kudu (Advanced Tools) via Browser
+#
+# Sometimes, accessing the Kudu dashboard from Microsoft Edge can result in redirection errors or persistent popups,
+# often due to stricter handling of authentication, cookies, or popups in Edge.
+# As a best practice, use Google Chrome or Firefox for accessing Azure Kudu/Advanced Tools,
+# as these browsers typically handle Azure authentication and redirects more reliably.
+# If you must use Edge, ensure popups and third-party cookies are allowed, and try clearing your browser cache.
 ####################################################################################################
