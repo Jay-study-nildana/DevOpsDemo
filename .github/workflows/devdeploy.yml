@@ -123,3 +123,32 @@ jobs: # Defines the jobs that will run as part of this workflow
 # as these browsers typically handle Azure authentication and redirects more reliably.
 # If you must use Edge, ensure popups and third-party cookies are allowed, and try clearing your browser cache.
 ####################################################################################################
+
+# ------------------------------------------------------------------------------------------
+# IMPORTANT: Azure App Service Startup Command for ASP.NET Core Apps (Linux)
+#
+# - Azure App Service (Linux) expects your application's entry point (.dll) to be located
+#   in the root of /home/site/wwwroot after deployment.
+#
+# - By default, Azure tries to auto-detect the startup file. If it cannot find your app's
+#   DLL, it will run the default Azure app (hostingstart.dll), showing the "Azure Welcome" page.
+#
+# - To ensure your Web API runs correctly, explicitly set the Startup Command in the Azure Portal:
+#     dotnet <YourAppName>.dll
+#   Example:
+#     dotnet BackEndAPI.dll
+#
+# - The Startup Command must match the name of your main .dll file as deployed.
+#
+# - If you still see the Azure startup page after deployment, it usually means:
+#     - The DLL is not in the root folder
+#     - The DLL name does not match your Startup Command
+#     - The Startup Command is not set
+#
+# - Always verify:
+#     - Your published files are in the correct location (/home/site/wwwroot)
+#     - The correct runtime stack is selected in App Service settings
+#     - The Startup Command matches your deployed .dll filename
+#
+# This comment summarizes common deployment issues and their solutions related to the Startup Command.
+# ------------------------------------------------------------------------------------------
