@@ -50,6 +50,10 @@ jobs: # Defines the jobs that will run as part of this workflow
       - name: List contents of published.zip # Step: Inspect the ZIP file before deployment
         run: unzip -l published.zip              
 
+      - name: Clean Azure Web App wwwroot before deployment # Step: Remove old files from wwwroot using Azure CLI
+        run: |
+          az webapp ssh --resource-group rgaugust15th2025 --name devwebappaugust152025 --command "rm -rf /home/site/wwwroot/*"        
+
       - name: Deploy to Azure Web App using Azure CLI # Step: Deploy the zipped output
         run: |
           az webapp deploy --resource-group rgaugust15th2025 --name devwebappaugust152025 --src-path published.zip
