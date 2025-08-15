@@ -28,6 +28,10 @@ jobs: # Defines the jobs that will run as part of this workflow
         run: npm run build
         working-directory: HelloWorldJuly222025 # Specify the React project folder
 
+      - name: Test # Step 5: Runs unit tests for the ReactJS project
+        run: npm test # Runs the test script defined in package.json
+        working-directory: HelloWorldJuly222025 # Specify the React project folder        
+
       # Add steps to upload artifacts if needed for deployment
       # For example, you can use 'actions/upload-artifact' to save build outputs for later use
 
@@ -48,9 +52,9 @@ jobs: # Defines the jobs that will run as part of this workflow
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}        
 
-      - name: Deploy to Azure Web App using Azure CLI # Step: Deploy the zipped output
+      - name: Deploy to Azure Web App using Azure CLI
         run: |
-          az webapp deploy --resource-group rgaugust15th2025 --name reacthelloworlddevaugust152025 --src-path HelloWorldJuly222025/dist.zip
+          az webapp deployment source config-zip --resource-group rgaugust15th2025 --name reacthelloworlddevaugust152025 --src HelloWorldJuly222025/dist.zip
 
 ####################################################################################################
 # Notes:
