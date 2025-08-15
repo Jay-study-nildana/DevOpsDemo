@@ -3,8 +3,8 @@ name: Build Test .NET Web API # The name of the workflow as it appears in GitHub
 on: # Specifies the events that trigger this workflow
   push: # Trigger when code is pushed to the repository
     branches:
-      - main        # Trigger on pushes to the main branch
-      - develop     # Trigger on pushes to the develop branch
+      - main-webapi        # Trigger on pushes to the main branch
+      - develop-webapi     # Trigger on pushes to the develop branch
   pull_request: # Trigger when a pull request is opened or updated
     branches:
       - '*' # Trigger on pull requests to any branch
