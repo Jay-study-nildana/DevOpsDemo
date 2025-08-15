@@ -1,6 +1,6 @@
-# BackEnd API
+# Razor Front End Web App
 
-Hello World web api without any database connection strings or any advance features. A simple swagger enabled project. Ideal for users who are looking to do their first time deployment to Azure Web App. 
+Hello World Razor Front End Web App. Ideal for users who are looking to do their first time deployment to Azure Web App. 
 
 Remember to check the workflow folder for related YAML code. 
 

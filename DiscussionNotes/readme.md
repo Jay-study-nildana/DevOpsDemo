@@ -1,8 +1,6 @@
-# BackEnd API
+# General Discussion notes
 
-Hello World web api without any database connection strings or any advance features. A simple swagger enabled project. Ideal for users who are looking to do their first time deployment to Azure Web App. 
-
-Remember to check the workflow folder for related YAML code. 
+Just some random discussions and notes that I have with AI.
 
 # book a session with me
 
