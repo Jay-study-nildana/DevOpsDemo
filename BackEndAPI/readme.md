@@ -1,15 +1,8 @@
-# DevOpsDemo
+# BackEnd API
 
-Shows how to do beginner level deployment. 
+Hello World web api without any database connection strings or any advance features. A simple swagger enabled project. Ideal for users who are looking to do their first time deployment to Azure Web App. 
 
-# Projects
-
-1. [.NET Web API](BackEndAPI)
-1. [Razor Front End](RazorFrontEnd)
-
-Visit .github/workflows for all the YAMLS used in this repo. 
-
-Some additional notes here, [DiscussionNotes](DiscussionNotes)
+Remember to check the workflow folder for related YAML code. 
 
 # book a session with me
 
