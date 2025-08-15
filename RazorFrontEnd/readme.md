@@ -4,6 +4,12 @@ Hello World Razor Front End Web App. Ideal for users who are looking to do their
 
 Remember to check the workflow folder for related YAML code. 
 
+## TODO
+
+1. jquery is not loading. 
+1. bootstrap bundle is not loading. 
+1. fix these like you did when the local bootstrap css was not loading, and you ended up using a global CDN.
+
 # book a session with me
 
 1. [calendly](https://calendly.com/jaycodingtutor/30min)

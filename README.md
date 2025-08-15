@@ -9,6 +9,8 @@ Shows how to do beginner level deployment.
 
 Visit .github/workflows for all the YAMLS used in this repo. 
 
+Some additional notes here, [DiscussionNotes](DiscussionNotes)
+
 # book a session with me
 
 1. [calendly](https://calendly.com/jaycodingtutor/30min)
