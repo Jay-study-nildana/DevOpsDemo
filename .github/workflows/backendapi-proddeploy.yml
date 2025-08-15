@@ -5,7 +5,7 @@ name: Deploy Prod .NET Web API # The name of the workflow as it appears in GitHu
 on: # Specifies the events that trigger this workflow
   push: # Trigger when code is pushed to the repository
     branches:
-      - main     # Trigger only on pushes (including merges) to the main branch
+      - main-webapi     # Trigger only on pushes (including merges) to the main branch
 
 jobs: # Defines the jobs that will run as part of this workflow
   build: # The name of the job
