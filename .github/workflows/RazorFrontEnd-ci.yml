@@ -1,4 +1,4 @@
-name: Build and Test .NET Razor Front End # The name of the workflow as it appears in GitHub Actions UI
+name: Build Test .NET Razor # The name of the workflow as it appears in GitHub Actions UI
 
 on: # Specifies the events that trigger this workflow
   push: # Trigger when code is pushed to the repository
