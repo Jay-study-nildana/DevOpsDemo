@@ -8,6 +8,8 @@ As of now, following 4 branches are available.
 1. develop-webapi
 1. main-razorfe
 1. develop-razorfe
+2. main-reactjs
+3. develop-reactjs
 
 # book a session with me
 
