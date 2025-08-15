@@ -1,15 +1,14 @@
-# DevOpsDemo
+# Razor Front End Web App
 
-Shows how to do beginner level deployment. 
+Hello World Razor Front End Web App. Ideal for users who are looking to do their first time deployment to Azure Web App. 
 
-# Projects
+Remember to check the workflow folder for related YAML code. 
 
-1. [.NET Web API](BackEndAPI)
-1. [Razor Front End](RazorFrontEnd)
+## TODO
 
-Visit .github/workflows for all the YAMLS used in this repo. 
-
-Some additional notes here, [DiscussionNotes](DiscussionNotes)
+1. jquery is not loading. 
+1. bootstrap bundle is not loading. 
+1. fix these like you did when the local bootstrap css was not loading, and you ended up using a global CDN.
 
 # book a session with me
 

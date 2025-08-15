@@ -1,15 +1,6 @@
-# DevOpsDemo
+# GitHub Actions Work Flow Welcome
 
-Shows how to do beginner level deployment. 
-
-# Projects
-
-1. [.NET Web API](BackEndAPI)
-1. [Razor Front End](RazorFrontEnd)
-
-Visit .github/workflows for all the YAMLS used in this repo. 
-
-Some additional notes here, [DiscussionNotes](DiscussionNotes)
+This folder contains all the workflows of the current project. 
 
 # book a session with me
 
@@ -27,3 +18,4 @@ find ways to hire me, follow me and stay in touch with me.
 1. [stackoverflow](https://stackoverflow.com/users/5338888/jay)
 1. [Jay's Coding Channel on YouTube](https://www.youtube.com/channel/UCJJVulg4J7POMdX0veuacXw/)
 1. [medium blog](https://medium.com/@vijayasimhabr)
+
