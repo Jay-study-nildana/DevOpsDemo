@@ -1,0 +1,38 @@
+name: Build and Test ReactJS App # The name of the workflow as it appears in GitHub Actions UI
+
+on: # Specifies the events that trigger this workflow
+  push: # Trigger when code is pushed to the repository
+    branches:
+      - main-reactjs        # Trigger on pushes to the main branch
+      - develop-reactjs     # Trigger on pushes to the develop branch
+  pull_request: # Trigger when a pull request is opened or updated
+    branches:
+      - '*' # Trigger on pull requests to any branch
+
+jobs: # Defines the jobs that will run as part of this workflow
+  build: # The name of the job
+    runs-on: ubuntu-latest # The job will run on the latest available Ubuntu runner
+
+    steps: # The sequence of steps to execute in the job
+      - name: Checkout code # Step 1: Checks out the repository code so it can be used by subsequent steps
+        uses: actions/checkout@v3 # Uses the official GitHub Action for checking out code
+
+      - name: Setup Node.js # Step 2: Sets up Node.js on the runner
+        uses: actions/setup-node@v4 # Uses the official GitHub Action for setting up Node.js
+        with:
+          node-version: '20.x' # Specifies the version of Node.js to install (use your project's required version)
+
+      - name: Install dependencies # Step 3: Installs npm dependencies
+        run: npm install # Installs dependencies listed in package.json
+        working-directory: HelloWorldJuly222025 # Specify the React project folder
+
+      - name: Build # Step 4: Builds the ReactJS project
+        run: npm run build # Runs the build script defined in package.json
+        working-directory: HelloWorldJuly222025 # Specify the React project folder
+
+      - name: Test # Step 5: Runs unit tests for the ReactJS project
+        run: npm test # Runs the test script defined in package.json
+        working-directory: HelloWorldJuly222025 # Specify the React project folder
+
+      # Add steps to upload artifacts if needed for deployment
+      # For example, you can use 'actions/upload-artifact' to save build outputs for later use
