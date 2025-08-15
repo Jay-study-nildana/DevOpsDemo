@@ -1,5 +1,21 @@
 # I have left plenty of comments at the end of this file for you to note down for your first devops deployment
 
+# Summary & Conclusion: Deploying Vite React to Azure
+
+# You built and deployed a Vite-based ReactJS app to Azure Web App (App Service on Linux, Node.js stack) using various Azure deployment best practices.
+# The build output (dist) was correctly zipped and deployed, and files appeared in /home/site/wwwroot.
+# Despite successful deployment, the site did not run as expected due to limitations of Azure Web App on Linux for serving pure static sites. It requires a custom Node.js server or additional configuration, which adds complexity and is not ideal for static SPA hosting.
+# You explored using the official GitHub Action (azure/webapps-deploy@v2) and Service Principal authentication, but the core issue remained: Azure Web App is not optimized for static React/Vite apps.
+# Recommended Solution:
+# For Vite-based React apps (and most modern SPAs), Azure Static Web Apps is the best choice. It is designed for static site hosting, provides automatic routing, global CDN, easy GitHub Actions integration, and requires no custom server or web.config.
+# This approach saves time, reduces complexity, and follows Azure SWA best practices.
+# Conclusion:
+# For Vite React projects, use Azure Static Web Apps instead of Azure Web App (App Service) for a smoother, faster, and more reliable deployment experience.
+
+## Ultimately, I am keeping this here for discussion purposes. 
+# This method puts all the files where it is supposed to and I can verify that files are happening via the bash shell. 
+# but, the app simply won't deploy
+
 name: Deploy Dev ReactJS App # The name of the workflow as it appears in GitHub Actions UI
 
 on: # Specifies the events that trigger this workflow
