@@ -2,7 +2,7 @@
 
 This is the main branch. It is empty on purpose. Check individual branches for different projects and corresponding deployment files. 
 
-As of now, following 4 branches are available. 
+As of now, following branches are available. 
 
 1. main-webapi
 1. develop-webapi
