@@ -1,0 +1,46 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+      <h2 class="mb-4 text-primary fw-bold">Contact Me</h2>
+      <p class="lead mb-4">
+        Have questions, feedback, or want to connect? Fill out the form below and I'll get back to you as soon as possible!
+      </p>
+      <form *ngIf="!messageSent" #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+        <div class="mb-3">
+          <label for="name" class="form-label">Your Name</label>
+          <input type="text" class="form-control" id="name" name="name" required minlength="2" [(ngModel)]="formData.name" #name="ngModel" placeholder="Enter your name">
+          <div *ngIf="name.invalid && name.touched" class="text-danger small">
+            Name is required (min 2 characters).
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="email" name="email" required email [(ngModel)]="formData.email" #email="ngModel" placeholder="name@example.com">
+          <div *ngIf="email.invalid && email.touched" class="text-danger small">
+            Please enter a valid email address.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="message" class="form-label">Message</label>
+          <textarea class="form-control" id="message" name="message" required minlength="5" [(ngModel)]="formData.message" #message="ngModel" rows="4" placeholder="Type your message here"></textarea>
+          <div *ngIf="message.invalid && message.touched" class="text-danger small">
+            Message is required (min 5 characters).
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary px-4" [disabled]="contactForm.invalid">Send Message</button>
+      </form>
+      <div *ngIf="messageSent" class="alert alert-success text-center">
+        <h5 class="mb-3">Message sent!</h5>
+        <button class="btn btn-outline-primary" (click)="sendAnother()">Send another message</button>
+      </div>
+      <div class="mt-4">
+        <h6>Or reach out directly:</h6>
+        <ul class="list-unstyled">
+          <li><strong>Email:</strong> <a href="mailto:jay@thechalakas.com" class="text-decoration-none"> jay@thechalakas.com</a></li>
+          <li><strong>Email:</strong> <a href="mailto:vijayasimhabr@live.com" class="text-decoration-none"> vijayasimhabr@live.com</a></li>          
+          <li><strong>GitHub:</strong> <a href="https://github.com/Jay-study-nildana" target="_blank" rel="noopener" class="text-decoration-none"> https://github.com/Jay-study-nildana</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

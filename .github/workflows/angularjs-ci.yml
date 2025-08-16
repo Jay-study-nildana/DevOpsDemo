@@ -1,0 +1,50 @@
+name: Build and Test Angular App # The name of the workflow as it appears in GitHub Actions UI
+
+on: # Specifies the events that trigger this workflow
+  push: # Trigger when code is pushed to the repository
+    branches:
+      - main-angularjs        # Trigger on pushes to the main branch
+      - develop-angularjs     # Trigger on pushes to the develop branch
+  pull_request: # Trigger when a pull request is opened or updated
+    branches:
+      - '*' # Trigger on pull requests to any branch
+
+jobs: # Defines the jobs that will run as part of this workflow
+  build: # The name of the job
+    runs-on: ubuntu-latest # The job will run on the latest available Ubuntu runner
+
+    steps: # The sequence of steps to execute in the job
+      - name: Checkout code # Step 1: Checks out the repository code so it can be used by subsequent steps
+        uses: actions/checkout@v3 # Uses the official GitHub Action for checking out code
+
+      - name: Setup Node.js # Step 2: Sets up Node.js on the runner
+        uses: actions/setup-node@v4 # Uses the official GitHub Action for setting up Node.js
+        with:
+          node-version: '20.x' # Specifies the version of Node.js to install (use your project's required version)
+
+      - name: Install dependencies # Step 3: Installs npm dependencies
+        run: npm install # Installs dependencies listed in package.json
+        working-directory: HelloWorldAIU # Specify the Angular project folder
+
+      - name: Build # Step 4: Builds the Angular project
+        run: npx ng build # Runs the build script defined in package.json
+        working-directory: HelloWorldAIU # Specify the Angular project folder
+
+      - name: Test # Step 5: Runs unit tests for the Angular project
+        run: npx ng test --watch=false --browsers=ChromeHeadless # Runs the test script defined in package.json
+        working-directory: HelloWorldAIU # Specify the Angular project folder
+
+      # Add steps to upload artifacts if needed for deployment
+      # For example, you can use 'actions/upload-artifact' to save build outputs for later use
+
+#       Your workflow is correctly set up to build and test your Angular project in GitHub Actions.
+# It uses the recommended steps for Angular CLI projects:
+
+# Checks out your code
+# Sets up Node.js
+# Installs dependencies in the HelloWorldAIU folder
+# Builds with npx ng build
+# Runs tests with npx ng test --watch=false --browsers=ChromeHeadless
+# Since these commands work locally, your workflow should work in GitHub Actions as well.
+# You can now push your changes and monitor the Actions tab for build and test results.
+# If you need to deploy to Azure, let me know and I’ll provide Azure deployment best practices for Angular!
