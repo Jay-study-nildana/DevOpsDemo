@@ -10,6 +10,8 @@ As of now, following branches are available.
 1. develop-razorfe
 2. main-reactjs
 3. develop-reactjs
+4. main-angularjs
+5. develop-angularjs
 
 # book a session with me
 
